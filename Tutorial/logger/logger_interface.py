@@ -1,7 +1,9 @@
+from time import perf_counter
+import traceback
 from Tutorial.logger.realizations.abstract import LoggerAbstract
-from Tutorial.logger.realizations.stdout import Logger
+from Tutorial.logger.realizations.stdout import StdoutLogger
 
-Logger: LoggerAbstract = Logger()
+Logger: LoggerAbstract = StdoutLogger()
 
 
 class log:
@@ -46,23 +48,40 @@ class log:
         Logger.warning(message)
 
 
-def init_logger(conf: Config, report_name: str) -> None:
+def init_logger(report_name: str) -> None:
+    global Logger
     """
     Log initialization for report by config.yml. If graylog conf is not exist - will be print all logs to stdout
     :param conf: consist Config object (parsed config.yml), that provide graylog credentials
     :param report_name: all log messages will be marks this value
     :return: None
     """
-    global Logger
-    try:
-        graylog = conf.get_graylog("main")
-        if graylog is None or graylog.host_string == "":
-            raise Exception("graylog is not exist in config")
+    Logger.set_logger(report_name)
+    print("Logger inited: will send logs there")
 
-        Logger = GraylogLogger(
-            graylog_address="{}:{}".format(graylog.host_string, graylog.port),
-            report_name=report_name,
-        )
-        print("graylog inited: will send logs there")
-    except Exception as e:
-        log.warning("using Logger, GraylogLogger: {}".format(e))
+
+def log_exception(func):
+    """
+    Decorator provides simple exception handler: logs exception and throws it up
+    :param func:
+    :return: None or exception
+    """
+
+    def inner(*args, **kwargs):
+        global traceback_printed
+        try:
+            start_time = perf_counter()
+            res = func(*args, **kwargs)
+            end_time = perf_counter()
+            run_time = end_time - start_time
+            log.info(f"Function {func.__name__} Took {run_time:.4f} seconds")
+        except Exception as e:
+            log.error(
+                "{} {}. \ntraceback: {}".format(
+                    func.__name__, e, traceback.format_exc()
+                )
+            )
+            raise e
+        return res
+
+    return inner
