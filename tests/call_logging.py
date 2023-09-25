@@ -7,5 +7,5 @@ from tests.module import sum11
 if __name__ == "__main__":
     init_logger("test")
 
-    log.info("info")
+    log.info("test report started")
     sum11(1, 2)

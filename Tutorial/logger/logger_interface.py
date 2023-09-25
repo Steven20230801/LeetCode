@@ -68,7 +68,6 @@ def log_exception(func):
     """
 
     def inner(*args, **kwargs):
-        global traceback_printed
         try:
             start_time = perf_counter()
             res = func(*args, **kwargs)
