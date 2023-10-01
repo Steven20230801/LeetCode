@@ -41,6 +41,13 @@ print(f"'H' in string", "H" in string)
 string_with_variable = "prtin string_variable: {string_variable}"
 print(string_with_variable.format(string_variable="Hello World"))
 print(f"string_with_variable: {string_with_variable}")
+# format
+today = "2021-01-01"
+print("today is {}".format(today))
+print("today is {today}".format(today=today))
+print("today is {today}".format(**{"today": today}))
+print("today is {today}".format_map({"today": today}))
+# %
 
 # string method
 print(f"string.upper()", string.upper())
