@@ -15,7 +15,7 @@ if __name__ == "__main__":
         {
             "Id": [1, 2, 3],
             "Name": ["Joe", "Henry", "Sam"],
-            "Salary": [70000, 80000, 60000],
+            "salary": [70000, 80000, 60000],
             "DepartmentId": [1, 2, 2],
         }
     )
