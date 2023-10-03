@@ -11,6 +11,67 @@ print(f"list_x.index(1) : {list_x.index(1)}")
 # raise ValueError if x not in s
 # print(f"list_x.index(6) : {list_x.index(6)}")
 
+# mutable sequence type opreations
+# s[i] = x
+list_x[0] = 6
+print(f"list_x : {list_x}")
+
+# del s[i]
+del list_x[0]
+print(f"list_x : {list_x}")
+
+# s[i:j] = t
+list_x[0:2] = [6, 7]
+print(f"list_x : {list_x}")
+
+# del s[i:j]
+del list_x[0:2]
+print(f"list_x : {list_x}")
+
+# s[i:j:k] = t
+list_x[0:3:2] = [6, 7]
+print(f"list_x : {list_x}")
+
+# del s[i:j:k]
+
+# s.append(x)
+list_x.append(6)
+print(f"list_x : {list_x}")
+
+# s.clear()
+list_x.clear()
+print(f"list_x : {list_x}")
+
+# s.copy()
+list_x = list(range(1, 6))
+list_y = list_x.copy()
+print(f"list_x : {list_x}")
+print(f"list_y : {list_y}")
+
+# s.extend(t)
+list_x.extend([6, 7, 8])
+print(f"list_x : {list_x}")
+
+# s *= n
+list_x *= 2
+print(f"list_x : {list_x}")
+
+# s.insert(i, x)
+list_x.insert(0, 0)
+print(f"list_x : {list_x}")
+
+# s.pop([i])
+list_x.pop(0)
+print(f"list_x : {list_x}")
+
+# s.remove(x)
+list_x.remove(1)
+print(f"list_x : {list_x}")
+
+# s.reverse()
+list_x.reverse()
+print(f"list_x : {list_x}")
+
 # x in s
 print(f"1 in list_x : {1 in list_x}")
 print(f"6 in list_x : {6 in list_x}")
