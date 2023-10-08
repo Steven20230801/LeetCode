@@ -43,3 +43,27 @@ if x:
     print("x is not empty")
 else:
     print("x value is empty")
+
+# and
+a = 1 and 2 and 3
+print(a)  # last True value
+b = 1 and 0 and 3
+print(b)  # 0, first False value
+# or
+a = 1 or 2 or 3
+print(a)  # first True value
+b = 0 or 0 or 3
+print(b)  # first True value
+# not
+a = not 1
+print(a)  # False
+b = not 0
+print(b)  # True
+
+x = 100
+if x > 0 and x < 100:
+    print("x > 0 and x < 100")
+elif x >= 100 and x < 200:
+    print("x > 100 and x < 200")
+else:
+    print("x > 200")
