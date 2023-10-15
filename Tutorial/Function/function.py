@@ -1,4 +1,12 @@
-# function definition
+# function without argument
+def printme():
+    print("I'm first call to user defined function!")
+
+
+printme()
+
+
+# function with argument
 def printme(str: str = "default value"):
     """
     Args:
@@ -7,9 +15,8 @@ def printme(str: str = "default value"):
         None
     """
     print(str)
-    return
+    return str
 
 
-a = printme("I'm first call to user defined function!")
-print(a)
+a = printme("I'm second call to user defined function!")
 printme("Again second call to the same function")
