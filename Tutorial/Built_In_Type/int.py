@@ -7,6 +7,10 @@ int_2 = int(1)
 print(id(int_1))
 print(id(int_2))
 print(int_1 == int_2)
+int_2 += 1
+print(id(int_2))
+print(id(int_1))
+print(int_2)
 # int basic
 print(f"int_1 + int_2", int_1 + int_2)
 print(f"int_1 - int_2", int_1 - int_2)
