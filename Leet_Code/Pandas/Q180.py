@@ -15,7 +15,7 @@ logs["Count"] = logs.groupby("Group")["num"].transform("count")
 
 # 筛选出现次数至少为 3 的组
 logs[logs["Count"] >= 3][["num"]].drop_duplicates().rename(
-    columns={"num": "ConsecutiveNums "}
+    columns={"num": "ConsecutiveNums"}
 )
 
 
