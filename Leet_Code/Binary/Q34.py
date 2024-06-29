@@ -42,3 +42,13 @@ nums = [5, 7, 7, 8, 8, 10]
 target = 8
 print(search_range(nums, target=8))
 print(search_range(nums, target=6))
+
+
+class Solution:
+    def searchRange(self, nums, target):
+        left = lower_bound(nums, target)
+        right = lower_bound(nums, target + 1) - 1
+        if left == len(nums) or nums[left] != target:
+            return [-1, -1]
+        else:
+            return [left, right]
