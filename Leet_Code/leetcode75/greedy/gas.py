@@ -35,7 +35,7 @@
 from typing import List
 
 
-# 2024.7.9
+# 2024.7.9(可過, 超時)
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
 
@@ -60,9 +60,32 @@ class Solution:
                 if i == len(gas):  # 環狀
                     i = 0
             if cap >= 0:
-                return True
-        return False
+                return i
+        return -1
+
+
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        # 計算每個站點的淨增加
+        net = [gas[i] - cost[i] for i in range(len(gas))]
+
+        if sum(net) < 0:  # 若淨增加是負值一定跑不完
+            return -1
+
+        # 若有的話則依序計算
+        st = 0  # 起始加油站
+        current_sum = 0  # 目前累加
+
+        for i in range(len(gas)):
+            current_sum += net[i]
+
+            if current_sum < 0:  # 因為跑不過了, 換加油站
+                st = i + 1
+                current_sum = 0  # 重置
+
+        return st
 
 
 Solution().canCompleteCircuit(gas=[1, 2, 3, 4, 5], cost=[3, 4, 5, 1, 2])
 Solution().canCompleteCircuit(gas=[2, 3, 4], cost=[3, 4, 3])
+Solution().canCompleteCircuit(gas=[5, 1, 2, 3, 4], cost=[4, 4, 1, 5, 1])
