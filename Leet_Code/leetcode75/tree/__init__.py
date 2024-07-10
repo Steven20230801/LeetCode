@@ -12,6 +12,9 @@ root.right = TreeNode(3)
 root.left.left = TreeNode(4)
 root.left.right = TreeNode(5)
 
+if root.left.left:
+    print("root.left.left")
+
 
 def preOrderTraversal(root):
     result = []
