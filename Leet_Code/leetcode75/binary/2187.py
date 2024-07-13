@@ -21,7 +21,7 @@ class Solution:
             mid = (l + r) // 2
             # 判斷目前能不能完成
             x = sum([mid // x for x in time])
-            if x < totalTrips:
+            if x < totalTrips:  # 若目前不能完成, 調整時間
                 l = mid + 1
             else:
                 r = mid - 1
