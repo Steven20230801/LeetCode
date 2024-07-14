@@ -32,3 +32,5 @@ class Solution:
 Solution().minimumTime([1, 2, 3], 5)
 Solution().minimumTime([5, 10, 10], 9)
 Solution().minimumTime([1], 4)
+
+Solution().minimumTime([9, 2], 8)
