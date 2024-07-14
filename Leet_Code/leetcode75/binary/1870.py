@@ -41,10 +41,10 @@ class Solution:
         while l <= r:
             mid = (l + r) // 2  # mid時速
             now_hours = calculate_hours(dist, mid)
-            if now_hours <= hour:  # 若目前花費時間比較少, 降低時速
-                r = mid - 1
-            else:
+            if now_hours > hour:  # 若目前花費時間比較多, 提高時速
                 l = mid + 1
+            else:
+                r = mid - 1
 
         return l
 
