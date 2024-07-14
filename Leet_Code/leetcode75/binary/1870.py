@@ -24,31 +24,32 @@ from typing import List
 
 class Solution:
     def minSpeedOnTime(self, dist: List[int], hour: float) -> int:
-        l, r = 0, sum(dist)  # // hour + 1  # 最大時速
-        # 求最小時速 = 大於等於的第一個下標
+
+        # 時間一定要大於len(dist)-1(每個站至少一小時)
+        if hour <= len(dist) - 1:
+            return -1
+
+        def calculate_hours(dist, speed):
+            n = len(dist)
+            # n-1需要無條件進入
+            x = sum([math.ceil(dist[i] / speed) for i in range(n - 1)])
+            x += dist[-1] / speed
+            return x
+
+        l, r = 1, 10**7  # // hour + 1  # 最大時速
+        # 求最小時速 = 大於的第一個下標
         while l <= r:
             mid = (l + r) // 2  # mid時速
-            x = [
-                math.ceil(dist[i] / mid) if i != len(dist) - 1 else dist[i] / mid
-                for i in range(len(dist))
-            ]
-
-            check = sum(x)  # 目前花費時間
-
-            if check == hour:
-                return mid
-
-            if check < hour:  # 若目前花費時間比較少, 降低時速
+            now_hours = calculate_hours(dist, mid)
+            if now_hours <= hour:  # 若目前花費時間比較少, 降低時速
                 r = mid - 1
             else:
                 l = mid + 1
 
-        if l >= hour:
-            return -1
-        else:
-            return l
+        return l
 
 
 Solution().minSpeedOnTime([1, 3, 2], 2.7)
 Solution().minSpeedOnTime([1, 3, 2], 6)
 Solution().minSpeedOnTime([1, 3, 2], 1.9)
+Solution().minSpeedOnTime([1, 1, 1], 2)
