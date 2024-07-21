@@ -3,27 +3,18 @@ from typing import List
 
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
+        maxn = 0  # 能跳到最遠的位子
 
-        n = len(nums) - 1
-        l = 0
-        ans = []
+        for i, jump in enumerate(nums):
 
-        def dfs(i, l=0):  # i 代表到了第幾個下標
-
-            if i >= n:
-                ans.append(l)
-                return
-
-            if nums[i] == 0:
-                return
-
-            for x in range(1, nums[i] + 1):
-
-                dfs(i + x, l=l + x)
-
-        dfs(0)
-
-        return ans, n in ans
+            # 如果最大位子到的了I的話
+            if maxn >= i and i + jump > maxn:
+                # 更新
+                maxn = i + jump
+            if i > maxn:
+                return False
+            if maxn >= len(nums) - 1:
+                return True
 
 
 Solution().canJump(nums=[2, 3, 1, 1, 4])
@@ -31,3 +22,16 @@ Solution().canJump(nums=[2, 3, 1, 1, 4])
 Solution().canJump(nums=[2, 3, 0, 0, 4])
 
 Solution().canJump(nums=[2, 0, 0])
+
+
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        target = len(nums) - 1  # last index
+
+        for i in reversed(range(len(nums))):
+            if i + nums[i] >= target:
+                target = i
+        return target == 0
+
+
+Solution().canJump(nums=[2, 3, 0, 0, 4])
