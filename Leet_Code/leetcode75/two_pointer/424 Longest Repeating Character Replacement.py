@@ -1,26 +1,25 @@
+from collections import Counter
+
+
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
 
-        res = 0
+        res = 1
         L = 0
-        remain = k
-        check = {}
-        for R in range(len(s)):
+        count = {}
+        maxf = 0
+        for R in range(0, len(s)):
 
-            if remain == 0 and s[R] != max(check):
-                # 若字母已經不能替換了
-                # 若不是出現最多的數字
-                if s[L] != max(check):
-                    remain += 1
+            if s[R] in count:
+                count[s[R]] += 1
+            else:
+                count[s[R]] = 1
 
-                check[s[L]] -= 1
+            maxf = max(maxf, count[s[R]])
+            while R - L + 1 - maxf > k:
+                count[s[L]] -= 1
                 L += 1
 
-            if s[R] in check:
-                check[s[R]] += 1
-            else:
-                check[s[R]] = 1
-                remain -= 1
             res = max(res, R - L + 1)
         return res
 
@@ -28,3 +27,8 @@ class Solution:
 Solution().characterReplacement("ABABB", 1)  # 5
 
 Solution().characterReplacement("ABABB", 2)  #
+
+# ABB 1
+# {A:1}, max A , Remain = 1, res = 1
+# {A:1, B:1}, max A, B, Remain = 0, res = 2
+# {A:1, B:2}, max B, Remain = 0, res = 3
