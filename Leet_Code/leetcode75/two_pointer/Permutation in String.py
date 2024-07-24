@@ -26,6 +26,7 @@ class Solution:
                     L += 1
 
             else:
+                L = R + 1
                 temp = counter.copy()
                 tempcnt = cnt
 
