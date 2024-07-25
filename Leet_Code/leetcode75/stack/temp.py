@@ -8,7 +8,7 @@ class Solution:
         for i in range(len(temperatures)):
 
             # 若目前stack有資料 且 最後一個比現在的小:
-            while st and st[-1] < temperatures[i]:
+            while st and temperatures[st[-1]] < temperatures[i]:
                 # 最外面的跳出來
                 x = st.pop()
                 ans[x] = i - x
