@@ -1,9 +1,9 @@
 from typing import Optional
-from leetcode75.linked_list import ListNode, list_to_linked_list, print_head
+from leetcode75.linked_list import ListNode, linked_list, print_head
 
 
-list1 = list_to_linked_list([])
-list2 = list_to_linked_list([1, 3, 4])
+list1 = linked_list([])
+list2 = linked_list([1, 3, 4])
 
 
 class Solution:

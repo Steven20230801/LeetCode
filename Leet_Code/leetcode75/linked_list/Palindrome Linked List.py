@@ -1,9 +1,9 @@
 from typing import Optional
 
-from leetcode75.linked_list import ListNode, print_head, list_to_linked_list
+from leetcode75.linked_list import ListNode, print_head, linked_list
 
 
-head = list_to_linked_list([1, 2, 2, 1])
+head = linked_list([1, 2, 2, 1])
 
 
 class Solution:

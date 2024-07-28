@@ -4,7 +4,7 @@ class ListNode:
         self.next = next
 
 
-def list_to_linked_list(lst):
+def linked_list(lst):
     if not lst:
         return None
     head = ListNode(lst[0])
@@ -16,7 +16,7 @@ def list_to_linked_list(lst):
 
 
 def print_list(lst):
-    linked_list = list_to_linked_list(lst)
+    linked_list = linked_list(lst)
     current = linked_list
     while current:
         print(current.val, end=" -> " if current.next else "\n")

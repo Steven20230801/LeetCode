@@ -2,7 +2,7 @@ from typing import Optional
 from Leet_Code.leetcode75.linked_list import (
     ListNode,
     print_list,
-    list_to_linked_list,
+    linked_list,
     print_head,
 )
 
@@ -22,11 +22,11 @@ class Solution:
         return dummy.next
 
 
-head = list_to_linked_list([7, 7, 7, 7])
+head = linked_list([7, 7, 7, 7])
 
 print_head(Solution().removeElements(head, 7))
 
 
-head = list_to_linked_list([1, 2, 6, 3, 4, 5, 6])
+head = linked_list([1, 2, 6, 3, 4, 5, 6])
 
 print_head(Solution().removeElements(head, 6))

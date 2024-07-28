@@ -1,9 +1,9 @@
 from typing import Optional
 
-from leetcode75.linked_list import ListNode, print_head, list_to_linked_list
+from leetcode75.linked_list import ListNode, print_head, linked_list
 
 
-head = list_to_linked_list([1, 2, 3, 4, 5])
+head = linked_list([1, 2, 3, 4, 5])
 print_head(head)
 
 
