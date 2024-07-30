@@ -10,37 +10,28 @@ class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
 
         next = 0
-        cur = l1
-        cur2 = l2
         x = dummy = ListNode()
-        while cur and cur2:
+        while l1 or l2 or next:
 
-            total = cur.val + cur2.val + next
+            a = l1.val if l1 else 0
+            b = l2.val if l2 else 0
+
+            total = a + b + next
             next, now = divmod(total, 10)
 
             x.val = now
-            x.next = ListNode()
 
-            cur = cur.next
-            cur2 = cur2.next
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
 
-        while cur:
-            total = cur.val + next
-            next, now = divmod(total, 10)
-            cur.val = now
-            cur = cur.next
+            if l1 or l2 or next:
+                x.next = ListNode()
+                x = x.next
 
-        if cur2:
-            cur = cur2
-            while cur:
-                total = cur.val + next
-                next, now = divmod(total, 10)
-                cur.val = now
-                cur = cur.next
-        print_head(dummy.next)
-        return dummy.next
+        print_head(dummy)
+        return dummy
 
 
 Solution().addTwoNumbers(list_to_linked_list([9, 9, 9]), list_to_linked_list([9, 9, 9, 9, 9]))
 
-Solution().addTwoNumbers(list_to_linked_list([9, 9, 9]), list_to_linked_list([9, 9, 9]))
+Solution().addTwoNumbers(list_to_linked_list([1, 2, 3]), list_to_linked_list([9, 9, 9]))
