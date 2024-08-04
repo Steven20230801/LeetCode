@@ -12,8 +12,37 @@ root.right = TreeNode(3)
 root.left.left = TreeNode(4)
 root.left.right = TreeNode(5)
 
+root2 = TreeNode(1, TreeNode(2, TreeNode(4), TreeNode(6)), TreeNode(3))
+
 if root.left.left:
     print("root.left.left")
+
+
+def get_tree_depth(root):
+    if not root:
+        return 0
+    return max(get_tree_depth(root.left), get_tree_depth(root.right)) + 1
+
+
+def print_tree(root):
+    if not root:
+        return
+
+    depth = get_tree_depth(root)
+    width = 2**depth - 1
+    rows = [[" " for _ in range(width)] for _ in range(depth)]
+
+    def fill_rows(node, row, col, depth):
+        if not node:
+            return
+        rows[row][col] = str(node.val)
+        fill_rows(node.left, row + 1, col - 2 ** (depth - row - 2), depth)
+        fill_rows(node.right, row + 1, col + 2 ** (depth - row - 2), depth)
+
+    fill_rows(root, 0, width // 2, depth)
+    rows = ["=========="] + rows + ["=========="]
+    for row in rows:
+        print("".join(row))
 
 
 def preOrderTraversal(root):
