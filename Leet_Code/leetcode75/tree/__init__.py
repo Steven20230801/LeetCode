@@ -14,8 +14,8 @@ root.left.right = TreeNode(5)
 
 root2 = TreeNode(1, TreeNode(2, TreeNode(4), TreeNode(6)), TreeNode(3))
 
-if root.left.left:
-    print("root.left.left")
+# if root.left.left:
+#     print("root.left.left")
 
 
 def get_tree_depth(root):
@@ -84,3 +84,34 @@ preOrderTraversal(root)
 
 
 # print(inOrderTraversal(root))  # 輸出: [4, 2, 5, 1, 3]
+
+
+def list_to_tree_node(lst):
+    if not lst:
+        return None
+
+    # 创建根节点
+    root = TreeNode(lst[0])
+    queue = [root]
+    i = 1
+
+    # 使用队列构建二叉树
+    while queue and i < len(lst):
+        node = queue.pop(0)
+
+        # 构建左子节点
+        if i < len(lst) and lst[i] is not None:
+            node.left = TreeNode(lst[i])
+            queue.append(node.left)
+        i += 1
+
+        # 构建右子节点
+        if i < len(lst) and lst[i] is not None:
+            node.right = TreeNode(lst[i])
+            queue.append(node.right)
+        i += 1
+
+    return root
+
+
+# 示例列表
