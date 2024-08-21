@@ -1,28 +1,18 @@
 from typing import List
+from collections import Counter
 
 
 class Solution:
     def maxOperations(self, nums: List[int], k: int) -> int:
         h = {}
-        l = 0
         ans = 0
-        while l < len(nums):
-            # 1 ->
-
-            # 找到匹配值且還有剩餘
-            if k - nums[l] in h and h[k - nums[l]] > 0:
-                h[k - nums[l]] -= 1
+        for n in nums:
+            if k - n in h and h[k - n] > 0:
+                h[k - n] -= 1
                 ans += 1
             else:
-                # 如果不再同時nums[l]又出現一次的話
-                if nums[l] in h:
-                    h[nums[l]] += 1
-                else:
-                    h[nums[l]] = 1
-
-            l += 1
-        return [ans, h]
-        # nums - k
+                h[n] = h.get(n, 0) + 1
+        return ans
 
 
 Solution().maxOperations(nums=[1, 2, 4, 3], k=6)
