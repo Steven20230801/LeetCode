@@ -1,29 +1,3 @@
-# class Solution {
-#     public int longestConsecutive(int[] nums) {
-#         // 建立一个存储所有数的哈希表，同时起到去重功能
-#         Set<Integer> set = new HashSet<>();
-#         for (int num : nums) {
-#             set.add(num);
-#         }
-
-#         int ans = 0;
-#         // 遍历去重后的所有数字
-#         for (int num : set) {
-#             int cur = num;
-#             // 只有当num-1不存在时，才开始向后遍历num+1，num+2，num+3......
-#             if (!set.contains(cur - 1)) {
-#                 while (set.contains(cur + 1)) {
-#                     cur++;
-#                 }
-#             }
-#             // [num, cur]之间是连续的，数字有cur - num + 1个
-#             ans = Math.max(ans, cur - num + 1);
-#         }
-#         return ans;
-#     }
-# }
-
-
 from typing import List
 
 
@@ -36,9 +10,7 @@ class Solution:
 
             cur = num
 
-            if (
-                not num - 1 in num_set
-            ):  # 檢查-1 是不是不存在, 存在的話代表不用算（因為相連有一樣起始點）
+            if not num - 1 in num_set:  # 檢查-1 是不是不存在, 存在的話代表不用算（因為相連有一樣起始點）
                 # 若不存在開始檢查+1
                 while cur + 1 in num_set:
                     cur += 1
