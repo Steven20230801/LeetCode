@@ -15,14 +15,14 @@ class Solution:
 
 class Solution:
     def findTheWinner(self, n: int, k: int) -> int:
-        x = [i for i in range(1, n + 1)]  # 初始化列表 1 到 n
-        del_pos = 0  # 从第一个位置开始
+        x = [i for i in range(1, n + 1)]  # 初始化 1 到 n
+        del_pos = 0  # 從第一個位置開始計算
 
-        while len(x) > 1:  # 当列表长度大于 1 时继续删除
-            del_pos = (del_pos + k - 1) % len(x)  # 计算需要删除的索引
+        while len(x) > 1:  # 持續做刪除, 直到只剩一個元素為止
+            del_pos = (del_pos + k - 1) % len(x)  # 從刪除元素後的索引開始加, 只需要加k-1個
             x.pop(del_pos)  # 删除该索引的元素
 
-        return x[0]  # 返回最后剩下的元素
+        return x[0]
 
 
 Solution().findTheWinner(n=5, k=2)  # 3
