@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Solution:
     def findTheWinner(self, n: int, k: int) -> int:
         x = [i for i in range(1, n + 1)]
@@ -23,6 +26,28 @@ class Solution:
             x.pop(del_pos)  # 删除该索引的元素
 
         return x[0]
+
+
+# [1,2,3,4,5]
+# [2,3,4,5,1]
+# [3,4,5,1]
+#
+class Solution:
+    def findTheWinner(self, n: int, k: int) -> int:
+        q = deque()
+
+        for i in range(1, n + 1):
+            q.append(i)
+
+        while len(q) > 1:
+
+            for i in range(k - 1):
+
+                ppl = q.popleft()
+                q.append(ppl)
+            q.popleft()
+
+        return q[0]
 
 
 Solution().findTheWinner(n=5, k=2)  # 3
