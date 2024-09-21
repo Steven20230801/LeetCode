@@ -39,3 +39,43 @@ class Solution:
 Solution().sortColors(nums=[2, 0, 2, 1, 1, 0])
 Solution().sortColors(nums=[2, 0, 1])
 Solution().sortColors(nums=[2, 1, 2])
+
+
+class Solution:
+    def sortColors(self, nums):
+
+        counter = Counter(nums)
+
+        l = 0
+
+        for x in [0, 1, 2]:
+            while x in counter and counter[x] > 0:
+                nums[l] = x
+                l += 1
+                counter[x] -= 1
+
+
+class Solution:
+    def sortColors(self, nums):
+        # quick select
+        cur, l, r = 0, 0, len(nums) - 1
+        # <l -> 都為0
+        # >r -> 都為2
+        while cur <= r:
+
+            if nums[cur] == 2:
+                nums[cur], nums[r] = nums[r], nums[cur]
+                r -= 1
+            elif nums[cur] == 0:
+                nums[cur], nums[l] = nums[l], nums[cur]
+                l += 1
+                cur += 1
+            else:
+                cur += 1
+
+        return nums
+
+
+Solution().sortColors(nums=[2, 0, 2, 1, 1, 0])
+Solution().sortColors(nums=[2, 0, 1])
+Solution().sortColors(nums=[2, 1, 2])

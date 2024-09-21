@@ -83,3 +83,28 @@ class Solution:
 
 Solution().quickSort([1, 1, 0, 2], 0, 3)
 Solution().quickSort([5, 5, 2, 1], 0, 3)
+
+
+class Solution:
+    def quickSort(self, nums, low, high):
+        if low < high:
+            pi = self.partition(nums, low, high)
+            self.quickSort(nums, low, pi - 1)
+            self.quickSort(nums, pi + 1, high)
+        return nums
+
+    def partition(self, nums, low, high):
+
+        i = low
+        pivot = nums[high]
+        for j in range(low, high):
+            if nums[j] < pivot:
+                nums[i], nums[j] = nums[j], nums[i]
+                i += 1
+
+        nums[i], nums[high] = nums[high], nums[i]
+        return i
+
+
+Solution().quickSort([1, 1, 0, 2], 0, 3)
+Solution().quickSort([5, 5, 2, 1], 0, 3)
