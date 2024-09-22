@@ -18,4 +18,21 @@ class Solution:
         return s
 
 
+# 2024.9.22
+class Solution:
+    def longestNiceSubstring(self, s: str) -> str:
+
+        if len(s) < 2:
+            return ""
+
+        for i, v in enumerate(s):
+            if v.swapcase() not in s:
+                left = self.longestNiceSubstring(s=s[:i])
+                right = self.longestNiceSubstring(s=s[i + 1 :])
+
+                return left if len(left) >= len(right) else right
+
+        return s
+
+
 Solution().longestNiceSubstring(s="bAa")
