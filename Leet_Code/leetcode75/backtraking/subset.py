@@ -55,4 +55,27 @@ class Solution:
         return res
 
 
-Solution().subsets(nums=[1])
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        ans = []
+        path = []
+
+        def dfs(i):
+            if i == n:
+                ans.append(path)
+                return
+
+            # 選
+            path.append(nums[i])
+            dfs(i + 1)
+            path.pop()
+
+            # 不選
+            dfs(i + 1)
+
+        dfs(0)
+        return ans
+
+
+Solution().subsets(nums=[1, 2])
