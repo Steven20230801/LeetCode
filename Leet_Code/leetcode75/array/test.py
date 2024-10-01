@@ -36,3 +36,20 @@ Solution().productExceptSelf([1, 2, 3, 4, 5])
 #         for i in range(len(nums)):
 
 #             ans.append( nums[:i] * nums(i:)   )
+
+
+
+class Solution:
+    def hIndex(self, citations: List[int]) -> int:
+        citations.sort(reverse=True)
+        # [6,5,3,1,0]
+        n = len(citations)
+        h = 0
+        for i, v in enumerate(citations):
+            if v >= n-i:
+                h+=1
+            else:
+                break
+        return h
+    
+Solution().hIndex([6,5,3,1,0])
