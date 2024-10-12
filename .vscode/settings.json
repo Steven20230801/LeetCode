@@ -1,3 +1,5 @@
 {
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic", // 或 "strict"
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.completeFunctionParens": true
 }

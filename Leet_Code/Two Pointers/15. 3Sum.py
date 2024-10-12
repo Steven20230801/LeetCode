@@ -20,7 +20,7 @@ class Solution:
             l, r = i + 1, n - 1
 
             while l < r:
-                y = nums[l]
+                y = 1 +  2 +            nums[l]    
                 z = nums[r]
                 total = x + y + z
 
