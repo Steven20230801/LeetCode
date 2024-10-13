@@ -6,7 +6,7 @@ from Leet_Code.Tree import TreeNode, list_to_tree_node, print_tree
 
 class Solution:
     def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
-        res = float('inf')  # 初始化最小差值為正無窮大
+        res = float("inf")  # 初始化最小差值為正無窮大
         prev = None  # 初始化前一個節點為 None
 
         def dfs(node):
@@ -21,7 +21,7 @@ class Solution:
             if prev is not None:
                 # 計算當前節點值與前一個節點值的差，更新最小差值
                 res = min(res, node.val - prev)
-            
+
             # 更新前一個節點的值為當前節點的值
             prev = node.val
 
@@ -42,10 +42,10 @@ Solution().getMinimumDifference(root=root)
 
 class Solution:
     def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
-        stack = []          # 用於模擬調用棧的棧
-        current = root      # 當前節點指針
-        prev = None         # 初始化前一個節點為 None
-        res = float('inf')  # 初始化最小差值為正無窮大
+        stack = []  # 用於模擬調用棧的棧
+        current = root  # 當前節點指針
+        prev = None  # 初始化前一個節點為 None
+        res = float("inf")  # 初始化最小差值為正無窮大
 
         # 中序遍歷迭代實現
         while stack or current:
@@ -53,7 +53,7 @@ class Solution:
             while current:
                 stack.append(current)
                 current = current.left
-            
+
             # 訪問當前節點
             current = stack.pop()
             if prev is not None:
@@ -67,7 +67,6 @@ class Solution:
         return res  # 返回最小差值
 
 
-
-root = list_to_tree_node(List=[4, 2, 6, 1, 3])
+root = list_to_tree_node(List=[10, 5, 15, 3, 7, None, 18, 1, None, None, None, 16])
 print_tree(root=root)
 Solution().getMinimumDifference(root=root)
