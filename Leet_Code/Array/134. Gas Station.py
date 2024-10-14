@@ -1,6 +1,5 @@
 from typing import List
 
-
 from typing import List
 
 
@@ -37,8 +36,53 @@ class Solution:
 
 # 優化思路：
 
+
 # 如果從某個起始點 A 出發無法到達 B，則從 A 到 B 之間的任何點作為起始點都無法成功。這是因為累積油量在 A 到 B 之間是負的。
 # 因此，我們可以跳過 A 到 B 之間的所有點，直接從 B 的下一個點作為新的起始點。
+from typing import List
+
+
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        net = [gas[i] - cost[i] for i in range(len(gas))]
+        total = net[0]
+        res = 0  # 最小值的下標
+        min_val = net[0]
+        for i in range(1, len(net)):
+            total += net[i]
+            if total <= min_val:
+                min_val = total
+                res = i
+
+        return (res + 1) % len(net) if sum(net) >= 0 else -1
+
+
+from typing import List
+
+
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        total = 0  # 總淨油量
+        current = 0  # 當前累積淨油量
+        res = 0  # 起始點
+
+        for i in range(len(gas)):
+            net = gas[i] - cost[i]
+            total += net
+            current += net
+
+            # 如果當前累積淨油量為負，則無法從起始點到 i 進行
+            if current < 0:
+                # 將起始點設為 i+1，並重置當前累積淨油量
+                res = i + 1
+                current = 0
+
+        # 如果總淨油量為負，則無法繞環
+        return res if total >= 0 else -1
+
 
 Solution().canCompleteCircuit(gas=[1, 2, 3, 4, 5], cost=[3, 4, 5, 1, 2])
 Solution().canCompleteCircuit(gas=[2, 3, 4], cost=[3, 4, 3])
+Solution().canCompleteCircuit(gas=[3, 1, 1], cost=[1, 2, 2])
+Solution().canCompleteCircuit(gas=[7, 1, 0, 11, 4], cost=[5, 9, 1, 2, 5])
+Solution().canCompleteCircuit(gas=[11, 4, 7, 1, 0], cost=[2, 5, 5, 9, 1])
