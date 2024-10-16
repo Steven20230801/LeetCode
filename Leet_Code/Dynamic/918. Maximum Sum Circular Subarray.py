@@ -1,3 +1,4 @@
+import glob
 from typing import List
 
 
@@ -21,10 +22,11 @@ class Solution:
             global_min = min(global_min, cur_min)
         circle_max = total - global_min
 
-        return max(circle_max, global_max) if total >= 0 else global_max
+        return max(circle_max, global_max) if total != global_min else global_max
 
 
 Solution().maxSubarraySumCircular(([5, -3, 5]))
 Solution().maxSubarraySumCircular(([-2, -3, -2]))
 Solution().maxSubarraySumCircular(([1, -2, 3, -2]))
+Solution().maxSubarraySumCircular(([1, -6, -7, 4]))
 # Solution().maxSubarraySumCircular()
