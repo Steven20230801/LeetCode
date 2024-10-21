@@ -20,7 +20,7 @@ class Solution:
             l, r = i + 1, n - 1
 
             while l < r:
-                y = 1 +  2 +            nums[l]    
+                y = nums[l]    
                 z = nums[r]
                 total = x + y + z
 
@@ -46,6 +46,6 @@ class Solution:
 
 
 Solution().threeSum(nums = [-1,0,1,2,-1,-4])
-Solution().threeSum(   nums =   [0,1,1])
+Solution().threeSum(nums = [0,1,1])
 Solution().threeSum(nums = [0,0,0])
-Solution().threeSum(nums =[-2,0,0,2,2])
+Solution().threeSum(nums = [-2,0,0,2,2])
