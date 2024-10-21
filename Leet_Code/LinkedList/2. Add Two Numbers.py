@@ -29,7 +29,7 @@ class Solution:
             total = val1 + val2 + carry  # 計算總和
             carry, value = divmod(total, 10)  # 計算本位的值和新的進位
             current.next = ListNode(value)  # 創建新的節點
-            current = current.next  # 移動到新的節點
+            current = current.next  # 移'動到新的節點
             if l1:
                 l1 = l1.next  # 移動到l1的下一個節點
             if l2:
