@@ -1,6 +1,8 @@
 from collections import deque
 from typing import List
 
+from sympy import N
+
 
 def draw(maze: List[List[str]]):
     for row in maze:
@@ -9,8 +11,6 @@ def draw(maze: List[List[str]]):
 
 class Solution:
     def nearestExit(self, maze: List[List[str]], entrance: List[int]) -> int:
-        maze = [["+", "+", "+", "+"], [".", ".", ".", "+"], ["+", "+", "+", "."]]
-        entrance = [1, 2]
         # draw(maze)
         rows, cols = len(maze), len(maze[0])
         queue = deque()
@@ -35,4 +35,36 @@ class Solution:
         return -1
 
 
+class Solution:
+    def nearestExit(self, maze: List[List[str]], entrance: List[int]) -> int:
+        nrow, ncol = len(maze), len(maze[0])
+        res = 0
+        queue = deque([entrance])
+        maze[entrance[0]][entrance[1]] = "+"
+        direction = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        while queue:
+
+            for _ in range(len(queue)):
+                r, c = queue.popleft()
+
+                if (r == 0 or r == nrow - 1 or c == 0 or c == ncol - 1) and [r, c] != entrance:
+                    return res
+
+                for dr, dc in direction:
+
+                    nr, nc = r + dr, c + dc
+                    if 0 <= nr < nrow and 0 <= nc < ncol and maze[nr][nc] == ".":
+                        maze[nr][nc] = "+"
+                        queue.append((nr, nc))
+
+            res += 1
+
+        return -1
+
+
 Solution().nearestExit(maze=[["+", "+", ".", "+"], [".", ".", ".", "+"], ["+", "+", "+", "."]], entrance=[1, 2])
+Solution().nearestExit(maze=[["+", "+", "+"], [".", ".", "."], ["+", "+", "+"]], entrance=[1, 0])
+Solution().nearestExit(
+    maze=[["+", ".", "+", "+", "+", "+", "+"], ["+", ".", "+", ".", ".", ".", "+"], ["+", ".", "+", ".", "+", ".", "+"], ["+", ".", ".", ".", "+", ".", "+"], ["+", "+", "+", "+", "+", ".", "+"]],
+    entrance=[1, 0],
+)
