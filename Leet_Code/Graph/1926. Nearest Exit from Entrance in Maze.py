@@ -62,6 +62,30 @@ class Solution:
         return -1
 
 
+class Solution:
+    def nearestExit(self, maze: List[List[str]], entrance: List[int]) -> int:
+        nrow, ncol = len(maze), len(maze[0])
+        res = 0
+        queue = deque([tuple(entrance)])  # 使用元組以確保一致性
+        maze[entrance[0]][entrance[1]] = "+"  # 標記入口為已訪問
+
+        while queue:
+            for _ in range(len(queue)):
+                r, c = queue.popleft()
+                # 檢查是否為出口且不是入口
+                if ((r == 0) or (r == nrow - 1) or (c == 0) or (c == ncol - 1)) and [r, c] != entrance:
+                    return res
+
+                for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                    nr, nc = r + dr, c + dc
+                    if 0 <= nr < nrow and 0 <= nc < ncol and maze[nr][nc] == ".":
+                        maze[nr][nc] = "+"  # 立即標記為已訪問
+                        queue.append((nr, nc))
+            res += 1
+
+        return -1
+
+
 Solution().nearestExit(maze=[["+", "+", ".", "+"], [".", ".", ".", "+"], ["+", "+", "+", "."]], entrance=[1, 2])
 Solution().nearestExit(maze=[["+", "+", "+"], [".", ".", "."], ["+", "+", "+"]], entrance=[1, 0])
 Solution().nearestExit(
