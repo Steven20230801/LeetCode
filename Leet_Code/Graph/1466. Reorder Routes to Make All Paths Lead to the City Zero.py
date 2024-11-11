@@ -113,4 +113,40 @@ class Solution:
         return count  # 返回需要重排的道路總數
 
 
+# 2024.11.09
+class Solution:
+    def minReorder(self, n: int, connections: List[List[int]]) -> int:
+        graph = defaultdict(list)
+        edges = {}
+
+        for s, d in connections:
+            graph[s].append(d)
+            graph[d].append(s)
+            edges[(s, d)] = 1
+
+        print(graph)
+        print(edges)
+
+        res = 0
+        visited = [False] * n
+        q = deque()
+        # init
+        q.append(0)
+        visited[0] = True
+
+        while q:
+
+            node = q.popleft()
+
+            for neighbor in graph[node]:
+                # 1, 4
+                if not visited[neighbor]:
+                    q.append(neighbor)
+                    visited[neighbor] = True
+
+                    if (node, neighbor) in edges:
+                        res += 1
+        return res
+
+
 Solution().minReorder(n=6, connections=[[0, 1], [1, 3], [2, 3], [4, 0], [4, 5]])
