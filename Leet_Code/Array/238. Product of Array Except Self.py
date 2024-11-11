@@ -52,3 +52,4 @@ class Solution:
     
 Solution().productExceptSelf(nums = [-1,1,0,-3,3])
 Solution().productExceptSelf(nums = [1,2,3,4])
+Solution().productExceptSelf(nums = [3,2,3,4])
