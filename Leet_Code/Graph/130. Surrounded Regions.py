@@ -8,11 +8,7 @@ class Solution:
         """
         Do not return anything, modify board in-place instead.
         """
-        board = [["X", "X", "X", "X"], ["X", "O", "O", "X"], ["X", "X", "O", "X"], ["X", "O", "X", "X"]]
-        draw(board)
-
         nr, nc = len(board), len(board[0])
-
         queue = deque()
 
         # 初始化邊界, 若是O加進來
@@ -30,22 +26,37 @@ class Solution:
             if board[nr - 1][c] == "O":
                 queue.append((nr - 1, c))
                 board[nr - 1][c] = "."
-        draw(board)
 
-        directions = [(0, 1), (-1, 0), (0, 1), (0, -1)]
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
         while queue:
             r, c = queue.popleft()
 
             for dr, dc in directions:
                 nr, nc = r + dr, c + dc
-                if 0 <= r < nr and 0 <= c < nc and board[nr][nc] == "O":
+                if (
+                    0 <= nr < len(board)
+                    and 0 <= nc < len(board[0])
+                    and board[nr][nc] == "O"
+                ):
                     board[nr][nc] = "."
                     queue.append((nr, nc))
 
-        for r in range(nr):
-            for c in range(nc):
-                if board[r][c] == ".":
+        for r in range(len(board)):
+            for c in range(len(board[0])):
+                if board[r][c] == "O":
                     board[r][c] = "X"
 
+                if board[r][c] == ".":
+                    board[r][c] = "O"
 
-draw(Solution().solve(board=[["X", "X", "X", "X"], ["X", "O", "O", "X"], ["X", "X", "O", "X"], ["X", "O", "X", "X"]]))
+        draw(board)
+
+
+Solution().solve(
+    board=[
+        ["X", "X", "X", "X"],
+        ["X", "O", "O", "X"],
+        ["X", "X", "O", "X"],
+        ["X", "O", "X", "X"],
+    ]
+)
