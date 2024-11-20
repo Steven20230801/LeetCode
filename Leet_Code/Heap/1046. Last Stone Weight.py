@@ -14,9 +14,9 @@ class Solution:
             y = -heapq.heappop(res)
 
             if x != y:
-                heapq.heappush(res, x - y)
+                heapq.heappush(res, -(x - y))
 
         if len(res) == 0:
             return 0
         else:
-            return res[0]
+            return -res[0]
