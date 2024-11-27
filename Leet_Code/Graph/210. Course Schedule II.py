@@ -5,9 +5,9 @@ from typing import List
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         # 构建前置课程映射表
-        premap = defaultdict(list)
+        graph = defaultdict(list)
         for course, prereq in prerequisites:
-            premap[course].append(prereq)
+            graph[course].append(prereq)
 
         # 用于记录访问状态：0=未访问, 1=访问中, 2=已访问
         visit_status = [0] * numCourses
@@ -28,7 +28,7 @@ class Solution:
 
             # 标记为访问中
             visit_status[course] = 1
-            for prereq in premap[course]:
+            for prereq in graph[course]:
                 dfs(prereq)
             # 标记为已访问
             visit_status[course] = 2
