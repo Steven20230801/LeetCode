@@ -45,6 +45,20 @@ class Solution:
         return res
 
 
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        n = len(nums)
+        res, cur_min_prod, cur_max_prod = nums[0], nums[0], nums[0]
+        for i in range(1, n):
+            if nums[i] < 0:
+                cur_min_prod, cur_max_prod = cur_max_prod, cur_min_prod
+            cur_max_prod = max(nums[i], cur_max_prod * nums[i])
+            cur_min_prod = min(nums[i], cur_min_prod * nums[i])
+            res = max(res, cur_max_prod)
+        return res
+
+
 Solution().maxProduct([2, 3, -2, 4])
+Solution().maxProduct([-2, -3, -4])
 Solution().maxProduct([-2, 0, -1])
 Solution().maxProduct([-2])
