@@ -36,35 +36,51 @@ Solution().findRedundantConnection(edges=[[1, 2], [1, 3], [2, 3]])
 from typing import List
 
 
+from typing import List  # 從 typing 模塊導入 List 類型，用於類型提示
+
+
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
-        # 建立鄰接表
+        # 建立一個空的鄰接表，用於表示圖的結構
         graph = {}
 
-        # DFS 函數，檢查是否存在從 current 到 target 的路徑
+        # 定義一個內部的 DFS 函數，用於檢查從 current 節點是否能到達 target 節點
         def dfs(current, target, visited):
             if current == target:
+                # 如果當前節點就是目標節點，表示存在路徑，返回 True
                 return True
+            # 將當前節點標記為已訪問
             visited.add(current)
+            # 遍歷當前節點的所有鄰居
             for neighbor in graph.get(current, []):
                 if neighbor not in visited:
+                    # 如果鄰居節點未被訪問，遞迴調用 DFS 函數檢查
                     if dfs(neighbor, target, visited):
+                        # 如果在鄰居節點中找到到達目標的路徑，返回 True
                         return True
+            # 如果所有鄰居都無法到達目標，返回 False
             return False
 
+        # 遍歷所有的邊，逐一檢查是否形成循環
         for u, v in edges:
-            # 檢查是否已經存在從 u 到 v 的路徑
+            # 檢查當前邊的兩個節點是否已經在圖中存在
             if u in graph and v in graph:
+                # 使用 DFS 檢查是否已經存在從 u 到 v 的路徑
                 if dfs(u, v, set()):
+                    # 如果存在路徑，說明添加這條邊會形成循環，返回這條冗餘邊
                     return [u, v]
-            # 添加邊到圖中
+            # 如果節點 u 還不在圖中，初始化其鄰居列表
             if u not in graph:
                 graph[u] = []
+            # 如果節點 v 還不在圖中，初始化其鄰居列表
             if v not in graph:
                 graph[v] = []
+            # 將節點 v 加入節點 u 的鄰居列表
             graph[u].append(v)
+            # 將節點 u 加入節點 v 的鄰居列表，因為圖是無向圖
             graph[v].append(u)
 
+        # 如果沒有找到冗餘的邊，返回空列表（根據題意，這種情況不會發生）
         return []
 
 
