@@ -81,6 +81,26 @@ class Solution:
         return res if total >= 0 else -1
 
 
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        total = 0  # 總淨油量
+        current = 0  # 當前累積淨油量
+        res = 0  # 起始點
+
+        for i in range(len(gas)):
+
+            net_add = gas[i] - cost[i]
+            total += net_add
+            current += net_add
+
+            # 若current < 0 代表從res走到i不可行
+            if current < 0:
+                current = 0
+                res = i + 1
+
+        return res if total >= 0 else 0
+
+
 Solution().canCompleteCircuit(gas=[1, 2, 3, 4, 5], cost=[3, 4, 5, 1, 2])
 Solution().canCompleteCircuit(gas=[2, 3, 4], cost=[3, 4, 3])
 Solution().canCompleteCircuit(gas=[3, 1, 1], cost=[1, 2, 2])
