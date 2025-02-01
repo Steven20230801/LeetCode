@@ -25,4 +25,28 @@ class Solution:
 
 Solution().simplifyPath("/.../a/../b/c/../d/./")
 
-"/.../b/d"
+path = "/home//foo/"
+
+
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+
+        path = path.split("/")
+
+        st = []
+
+        for x in path:
+            if not x or x == ".":
+                continue
+            elif x == "..":  # 全部忽略
+                if st and len(st) > 0:
+                    st.pop()
+
+            else:
+                st.append(x)
+
+        return "/" + "/".join(st)
+
+
+Solution().simplifyPath("/home/")
+Solution().simplifyPath("/home//foo/")
