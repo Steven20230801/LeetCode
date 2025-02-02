@@ -27,11 +27,11 @@ class Solution:
                 r = m - 1
 
         return l  # = r+1 = nums[m] > nums[m+1]
-    
+
 
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
-        l, r = 0, len(nums) # 左閉右開
+        l, r = 0, len(nums)  # 左閉右開
         while l < r:
             m = (l + r) // 2
 
@@ -40,7 +40,8 @@ class Solution:
             else:
                 r = m
 
-        return l 
+        return l
+
 
 Solution().findPeakElement([1, 2, 3, 1])
 Solution().findPeakElement([1, 2, 1, 3, 5, 6, 4])
