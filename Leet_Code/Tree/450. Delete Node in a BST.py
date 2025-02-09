@@ -13,20 +13,22 @@ class Solution:
     def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
         if not root:
             return None
-        if key < root.val:
-            root.left = self.deleteNode(root.left, key)
-        elif key > root.val:
+
+        if root.val < key:
             root.right = self.deleteNode(root.right, key)
+        elif root.val > key:
+            root.left = self.deleteNode(root.left, key)
         else:
             if not root.left:
-                return root.right
-            if not root.right:
-                return root.left
-            temp = root.right
-            mini = temp.val
-            while temp.left:
-                temp = temp.left
-                mini = temp.val
-            root.val = mini
-            root.right = self.deleteNode(root.right, root.val)
+                root = root.right  # 1. 不確定要return 還是 root =
+            elif not root.right:
+                root = root.left
+            else:
+                # 找root.right最小的節點
+                cur = root.right
+                while cur and cur.left:
+                    cur = cur.left
+
+                root.val = cur.val
+                root.right = self.deleteNode(root.right, key=cur.val)
         return root
