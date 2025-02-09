@@ -24,7 +24,7 @@ class Solution:
 
 
 Solution().sortArray([1, 1, 0, 2])
-Solution().sortArray([5, 5, 2, 1])
+Solution().sortArray([5, 5, 2, 3, 1])
 
 
 class Solution:
