@@ -1,14 +1,23 @@
-from typing import List
+from collections import defaultdict
+from typing import Counter, List
 
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         counter = Counter(nums)
-        # {1:3, 2: 2, 3:1}
-        # -> freq: 3: 1
-        freq = defaultdict(list)
+        freqs = [[] for _ in range(len(nums) + 1)]
         for v, f in counter.items():
-            freq[f].append(v)
+            freqs[f].append(v)
 
-        print(freq)
-        # {3:[1], 2:[2], 1:[3]}
+        res = []
+        for i in range(len(nums), -1, -1):
+            if k > 0:
+                res.extend(freqs[i])
+                k -= len(freqs[i])
+            else:
+                return res
+        return res
+
+
+Solution().topKFrequent([1, 1, 1, 2, 2, 3], 2)
+Solution().topKFrequent([1], 1)
