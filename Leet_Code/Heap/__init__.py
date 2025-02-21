@@ -1,3 +1,4 @@
+from heapq import heappop
 from Leet_Code.Tree import print_tree, list_to_tree_node
 
 
@@ -68,3 +69,52 @@ print(h.heap)
 print_tree(list_to_tree_node(h.heap[1:]))
 h.pop()
 print_tree(list_to_tree_node(h.heap[1:]))
+
+
+def heapify(arr):
+    """將列表 arr 轉換為最小堆。"""
+    n = len(arr)
+    # 從最後一個非葉節點開始，向前進行下濾操作
+    # 最後一個非葉節點的索引為 n // 2 - 1
+    for i in range(n // 2 - 1, -1, -1):
+        sift_down(arr, i, n)
+
+
+def sift_down(arr, i, n):
+    """
+    對索引 i 開始的節點進行下濾操作，使該子樹滿足最小堆性質。
+    n 表示堆的大小（通常為列表的長度）。
+    """
+    while True:
+        smallest = i  # 設定目前節點為最小值
+        left = 2 * i + 1  # 左子節點索引
+        right = 2 * i + 2  # 右子節點索引
+
+        # 比較左子節點
+        if left < n and arr[left] < arr[smallest]:
+            smallest = left
+
+        # 比較右子節點
+        if right < n and arr[right] < arr[smallest]:
+            smallest = right
+
+        # 若父節點已是最小，則停止下濾
+        if smallest == i:
+            break
+
+        # 交換父節點與較小的子節點
+        arr[i], arr[smallest] = arr[smallest], arr[i]
+        # 將指標移動到子節點位置，繼續下濾
+        i = smallest
+
+
+# 測試範例
+if __name__ == "__main__":
+    data = [5, 7, 9, 1, 3]
+    heapify(data)
+    print("轉換後的堆：", data)  # 輸出可能為：[1, 3, 9, 7, 5]
+    print_tree(list_to_tree_node(data))
+    heappop(data)
+    print_tree(list_to_tree_node(data))
+    heappop(data)
+    print_tree(list_to_tree_node(data))

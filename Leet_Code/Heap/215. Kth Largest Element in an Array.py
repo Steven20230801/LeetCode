@@ -7,14 +7,16 @@ class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         res = []
         for num in nums:
-            heappush(res, -num)
+            heappush(res, num)
 
         print_tree(list_to_tree_node(res))
 
         while len(res) > k:
             heappop(res)
 
-        return -res[0]
+        print_tree(list_to_tree_node(res))
+
+        return res[0]
 
 
 Solution().findKthLargest(nums=[3, 2, 1, 5, 6, 4], k=2)
