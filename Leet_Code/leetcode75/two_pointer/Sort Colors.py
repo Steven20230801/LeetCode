@@ -69,7 +69,7 @@ class Solution:
             elif nums[cur] == 0:
                 nums[cur], nums[l] = nums[l], nums[cur]
                 l += 1
-                cur += 1
+                # cur += 1
             else:
                 cur += 1
 

@@ -108,3 +108,8 @@ class Solution:
 
 Solution().quickSort([1, 1, 0, 2], 0, 3)
 Solution().quickSort([5, 5, 2, 1], 0, 3)
+
+
+201
+102
+012

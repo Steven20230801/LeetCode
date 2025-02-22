@@ -53,12 +53,55 @@ class Heap:
         # 回傳原本的根節點值（即最小值）
         return pop_val
 
-    # We read the root element since it is the element we wish to pop.
-    # Next, we take the right-most node of the last level and swap it with the root node.
-    # We have now maintained the structure property, but the order property is violated.
-    # To fix the order property, we have to make sure that 30 finds its place.
-    # To do so, we will continously swap 30 with min(left_child, right_child) until it reaches the correct position, i.e. both of it's children are greater than or equal to 30.
-    # We swap 30 with 16, then 19 with 30. The resulting tree will look like the following.
+    def heapify(self, arr, n, i):
+        smallest = i  # 目前節點
+        left = 2 * i  # 左子節點
+        right = 2 * i + 1  # 右子節點
+
+        # 比較左子節點
+        if left < n and arr[left] < arr[smallest]:
+            smallest = left
+
+        # 比較右子節點
+        if right < n and arr[right] < arr[smallest]:
+            smallest = right
+
+        # 若最小值不是自己，則交換並遞迴調整
+        if smallest != i:
+            arr[i], arr[smallest] = arr[smallest], arr[i]
+            self.heapify(arr, n, smallest)  # 遞迴調整子樹
+
+    def build_heap(self, arr):
+        n = len(arr)
+        # 從最後一個非葉節點開始 (n//2)
+        for i in range(n // 2, 0, -1):
+            self.heapify(arr, n, i)
+
+    def heapify2(self, arr):
+        # 0-th position is moved to the end
+        arr.append(arr[0])
+
+        self.heap = arr
+        cur = (len(self.heap) - 1) // 2
+        while cur > 0:
+            # Percolate down
+            i = cur
+            while 2 * i < len(self.heap):
+                if 2 * i + 1 < len(self.heap) and self.heap[2 * i + 1] < self.heap[2 * i] and self.heap[i] > self.heap[2 * i + 1]:
+                    # Swap right child
+                    tmp = self.heap[i]
+                    self.heap[i] = self.heap[2 * i + 1]
+                    self.heap[2 * i + 1] = tmp
+                    i = 2 * i + 1
+                elif self.heap[i] > self.heap[2 * i]:
+                    # Swap left child
+                    tmp = self.heap[i]
+                    self.heap[i] = self.heap[2 * i]
+                    self.heap[2 * i] = tmp
+                    i = 2 * i
+                else:
+                    break
+            cur -= 1
 
 
 h = Heap()
